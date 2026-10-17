@@ -27,11 +27,27 @@
 
 ## 直接使用 Skill
 
-### 支持目录式 Skill 的宿主
+先安装 [Git](https://git-scm.com/downloads)，然后按使用的工具复制一条命令到终端运行。以下命令均适用于 Windows PowerShell、macOS 和 Linux 终端；如果目标目录已存在，Git 会停止，不覆盖已有安装。
 
-将整个仓库目录作为名为 `american-corporate-headshot` 的 Skill 安装，保留相对路径。不同宿主的安装和自动发现方式以其当前说明为准，不需要改写核心指令。
+### Codex 一键安装
 
-对支持用户级 `~/.codex/skills` 目录的 Codex 环境，可将本仓库放入该目录下的 `american-corporate-headshot/`，然后按宿主说明刷新或重新打开会话。本项目创建不会自动覆盖或安装到你的全局 Skill 目录。
+```sh
+git clone --depth 1 https://github.com/AdenXie/american-corporate-headshot.git "$HOME/.agents/skills/american-corporate-headshot"
+```
+
+安装到 Codex 的用户级 Skill 目录，可在本机不同项目中使用；目录依据 [Codex 官方 Skill 说明](https://learn.chatgpt.com/docs/build-skills)。安装后若未出现，重新打开 Codex 会话，在 Skill 选择器中选择或输入 `$american-corporate-headshot`。
+
+### Claude Code 一键安装
+
+```sh
+git clone --depth 1 https://github.com/AdenXie/american-corporate-headshot.git "$HOME/.claude/skills/american-corporate-headshot"
+```
+
+安装到 Claude Code 的用户级 Skill 目录，可在本机项目中使用；目录依据 [Claude Code 官方 Skill 说明](https://code.claude.com/docs/en/skills)。安装后输入 `/american-corporate-headshot`，若未出现则重新打开会话。这种本地安装不自动同步到云端会话。
+
+### 开始制作头像
+
+上传清晰的本人照片，然后说明用途、风格和允许修改的范围。例如在 Codex 中：
 
 ```text
 使用 $american-corporate-headshot。照片是我本人，用于 LinkedIn 和金融实习申请。
@@ -40,13 +56,9 @@
 工具和已有授权允许时，最多三张候选和两次修复；没有编辑工具就交付英文提示词。
 ```
 
-随后上传清晰原图。如果宿主不支持 `$skill-name`，直接提供 `SKILL.md` 和它引用的相关文件，要求按其中流程执行。仅粘贴文件不会安装图像工具。
+Claude Code 中把首句改为 `/american-corporate-headshot`，其余要求可以照用。其他支持目录式 Skill 的宿主可加载整个仓库，保留相对路径；没有 Skill 安装机制时，提供 `SKILL.md` 及其引用的相关文件。
 
-### Work 中接续
-
-让 Work 访问本 GitHub 仓库并读取 `SKILL.md` 与 [WORK_HANDOFF.md](WORK_HANDOFF.md)，即可继续维护或使用。读取一个 GitHub 仓库不代表已经将 Skill 安装到 Work，实际加载方式由宿主决定；附件也需要在目标聊天中可访问。
-
-项目偏好是 **GPT-6.1 Sol / High**。这是协调模型的用户选择，不是图片模型要求。仓库文件不能切换聊天模型；在 Work 的模型/推理设置中选择，并以界面显示为准。[官方模型说明](https://learn.chatgpt.com/docs/models)介绍了相关控制入口。
+安装仅提供指令、模板和离线生成器，不会增加图像工具。Claude Code 或其他环境若只能看图并输出文字，就按 Prompt Studio 流程交付英文提示词；只有接入参考图编辑工具后才能生成本人头像。
 
 ## 离线 Prompt Studio 快速开始
 
@@ -71,7 +83,7 @@ python -m unittest discover -s tests -v
 american-corporate-headshot/
   SKILL.md                       核心指令与双模式流程
   README.md                      使用与安装说明
-  WORK_HANDOFF.md                 接续需求、设计决定、验证边界
+  LICENSE                        AGPL-3.0 完整许可证
   agents/openai.yaml              可选的 Codex 展示元数据
   styles/presets.json             五种预设与相邻风格
   prompts/                       主编辑、负面约束、局部修复模板
@@ -95,3 +107,7 @@ american-corporate-headshot/
 ## English overview
 
 An identity-preserving corporate headshot skill with five style presets, reference-image editing workflows, visual QA, bounded repairs, and a vision-only Prompt Studio fallback. A vision model that only outputs text cannot produce images without an image tool. The included Python CLI is an offline prompt and plan composer, not an image generator. Keep personal photos out of Git and have the subject approve the final likeness.
+
+## 开源许可证
+
+Copyright (C) 2026 AdenXie。项目采用 [GNU Affero General Public License v3.0](LICENSE)，SPDX 标识为 `AGPL-3.0-only`。许可证适用于本仓库的代码、Skill 指令、提示词模板和文档；完整条款见 `LICENSE`。

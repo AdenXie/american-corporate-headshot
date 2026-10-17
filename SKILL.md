@@ -1,5 +1,6 @@
 ---
 name: american-corporate-headshot
+license: AGPL-3.0-only
 description: Create identity-preserving American corporate and LinkedIn headshots from a user's reference photos. Use image editing tools when available, or prepare executable English editing prompts in Prompt Studio when the model can inspect images but cannot output them. For professional profile portraits, not official passport or visa compliance.
 ---
 

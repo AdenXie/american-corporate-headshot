@@ -4,6 +4,7 @@
 /outputs/
 /runs/
 /work/
+/WORK_HANDOFF.md
 *.jpg
 *.jpeg
 *.png
