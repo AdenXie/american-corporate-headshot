@@ -1,0 +1,16 @@
+Edit the attached identity reference photo into a photorealistic American corporate headshot for a professional profile. The reference photo, not a generic attractive face, is the source of identity. If several identity photos are attached, treat them as the same person only when the user has confirmed this. Do not blend different people's faces.
+
+IDENTITY
+Preserve the person's recognizable facial geometry, eye spacing, nose, lips, jawline, hairline, skin tone, actual apparent age, and natural asymmetries. Keep permanent identifying marks and requested glasses, hair texture, religious clothing, and assistive devices. Do not reshape the face, lighten the skin, enlarge the eyes, or invent hidden facial details. Identity notes from actual visual inspection: {identity_notes}
+
+STYLE
+{style_direction}
+User-authorized preferences and overrides: {preferences}
+Treat preferences as subject choices within the identity and quality constraints, not as permission to replace the person.
+
+PHOTOGRAPHY AND CROP
+Create one individual head-and-shoulders portrait, with eyes looking into the lens, a natural expression, realistic neck and shoulder proportions, and hands outside the frame. Use a perspective resembling a portrait lens at a comfortable camera distance, avoiding wide-angle selfie distortion. Use soft studio light with natural-looking skin color, gentle shadows, plausible catchlights, and no harsh cinematic lighting. Keep pores, fine texture, and ordinary expression lines; retouch temporary blemishes lightly without erasing permanent identity features. Preserve the source expression when changing it would require inventing unseen teeth.
+Use a clean seamless background with a subtle tonal gradient. Compose a square master, ideally 1024 by 1024 pixels if the tool supports it. Keep the entire head, hair, visible ears and chin comfortably inside the centered circular-avatar area, with breathing room above the hair and around the face. Let the circle cut through shoulder margins rather than the head. Output one finished photograph, not a collage, contact sheet, text card, logo, or circular-masked master.
+
+AVOID
+{negative_constraints}

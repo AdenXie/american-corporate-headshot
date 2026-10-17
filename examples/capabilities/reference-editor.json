@@ -1,0 +1,7 @@
+{
+  "inspect_inputs": true,
+  "reference_edit": true,
+  "inspect_outputs": true,
+  "tool": "replace-with-observed-reference-editor-tool",
+  "evidence": "Illustrative fixture only. Before use, inspect actual tool documentation and confirm reference-image editing, input access and output inspection. This file does not discover or enable a tool."
+}

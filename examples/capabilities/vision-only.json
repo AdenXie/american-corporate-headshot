@@ -1,0 +1,7 @@
+{
+  "inspect_inputs": true,
+  "reference_edit": false,
+  "inspect_outputs": true,
+  "tool": null,
+  "evidence": "Illustrative fixture only: a visual language model can inspect attachments but no reference-image editor is exposed. Replace with observed runtime evidence."
+}

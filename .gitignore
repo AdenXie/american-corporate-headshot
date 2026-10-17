@@ -1,0 +1,24 @@
+# Personal material stays out of Git, including private repositories.
+/private/
+/inputs/
+/outputs/
+/runs/
+/work/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.heic
+*.tif
+*.tiff
+*.avif
+*.pdf
+*.zip
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+Thumbs.db

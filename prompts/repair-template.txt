@@ -1,0 +1,5 @@
+Repair the attached candidate headshot, using the original identity reference photo as the authority for the person's appearance.
+Observed defect: [describe only the visible issue and its location].
+Required local correction: [describe one small repair].
+Preserve identity, facial geometry, age, skin tone, natural asymmetry, expression, hairstyle, and all unaffected regions. Preserve the chosen clothing, background, lighting and framing unless they are the stated defect. Do not beautify or redesign the face. If the defect cannot be repaired without guessing the subject's features, stop and request a clearer original reference.
+Return one corrected photograph. The user will inspect identity and remaining artifacts before use.

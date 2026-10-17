@@ -1,0 +1,4 @@
+interface:
+  display_name: "American Corporate Headshot"
+  short_description: "美式 LinkedIn 商务头像：参考图编辑、五种风格与视觉质检"
+  default_prompt: "使用 $american-corporate-headshot，根据我的照片制作自然可信的 LinkedIn 头像；先检查当前图像工具能力。"

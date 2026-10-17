@@ -1,0 +1,9 @@
+{
+  "style": "classic-linkedin",
+  "references": ["attachment:my-front-photo"],
+  "source_reviewed": false,
+  "provider_processing_authorized": false,
+  "preferences": "Prefer a navy blazer and an open collar. Keep my glasses if present in the original. Keep a natural closed-mouth smile unless the original clearly shows my teeth.",
+  "candidate_count": 3,
+  "max_tool_calls": 5
+}

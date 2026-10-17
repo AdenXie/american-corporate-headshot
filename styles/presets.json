@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "default": "classic-linkedin",
+  "presets": {
+    "classic-linkedin": {
+      "name": "Classic LinkedIn Corporate",
+      "summary_zh": "通用 LinkedIn：自然、稳妥、头肩棚拍",
+      "adjacent": "consulting-mbb",
+      "direction": "A classic American corporate headshot with a light warm-gray seamless background, a neatly fitted neutral blazer over a simple shirt or blouse, a relaxed modest smile, shoulders turned slightly while the face stays toward the camera, and soft balanced studio lighting with gentle facial modeling."
+    },
+    "wall-street-finance": {
+      "name": "Wall Street / Finance",
+      "summary_zh": "金融：深色正装、克制自信，不改变年龄",
+      "adjacent": "classic-linkedin",
+      "direction": "A restrained finance professional headshot with a charcoal or muted blue-gray seamless background, a well-fitted dark navy or charcoal suit and simple light shirt or blouse, an optional tie only if requested, a subtle approachable smile, and softly directional studio light with readable eyes and controlled contrast. Keep the subject's actual apparent age; avoid a stern expression, heavy shadows, luxury props, or executive-age styling."
+    },
+    "consulting-mbb": {
+      "name": "Consulting / MBB Polished",
+      "summary_zh": "咨询：正式、温和、干净，无公司品牌暗示",
+      "adjacent": "classic-linkedin",
+      "direction": "A polished consulting headshot with a neutral warm-gray background, a tailored understated blazer and clean light shirt or blouse, an attentive gentle smile, upright relaxed posture, and bright soft studio light that preserves facial depth. Convey a tidy professional presentation without logos, company associations, dramatic authority cues, or glossy magazine retouching."
+    },
+    "big-tech-startup": {
+      "name": "Big Tech / Startup Professional",
+      "summary_zh": "科技：简洁 smart casual，轻松且职业",
+      "adjacent": "classic-linkedin",
+      "direction": "A modern technology professional headshot with a clean pale-gray or softly muted blue background, a simple open-collar shirt, fine-knit top, or smart-casual blazer according to the subject's preference, a relaxed natural smile, and airy soft studio light. Keep the look professional and uncluttered; avoid hooded costume styling, startup props, office logos, or changing the subject's apparent age."
+    },
+    "graduate-analyst": {
+      "name": "Graduate / Analyst",
+      "summary_zh": "校招：清爽正式、友好，保持本人年龄",
+      "adjacent": "consulting-mbb",
+      "direction": "A graduate or entry-level analyst headshot with a fresh light warm-gray background, a well-fitted simple blazer over a plain shirt or blouse, a friendly unforced smile, relaxed straight posture, and clear soft studio light. Preserve the subject's actual apparent age and individuality. Avoid artificially aging or de-aging the face, senior-executive styling, university insignia, and claims of academic pedigree."
+    }
+  }
+}
