@@ -39,8 +39,11 @@ def compose(request, capabilities):
     if not isinstance(request, dict) or not isinstance(capabilities, dict):
         raise ValueError("request and capabilities must be JSON objects")
     catalog = load_json(ROOT / "styles/presets.json")
-    style_id = request.get("style", catalog["default"])
-    if not isinstance(style_id, str) or style_id not in catalog["presets"]:
+    requested_style = request.get("style", catalog["default"])
+    if not isinstance(requested_style, str):
+        raise ValueError("Unknown style; use --list-styles")
+    style_id = catalog.get("aliases", {}).get(requested_style, requested_style)
+    if style_id not in catalog["presets"]:
         raise ValueError("Unknown style; use --list-styles")
     flags = {key: checked_bool(capabilities, key) for key in CAP_KEYS}
     if any(flags.values()):
@@ -54,7 +57,7 @@ def compose(request, capabilities):
         raise ValueError("references must be a list of nonempty attachment labels")
     if reviewed and (not references or not flags["inspect_inputs"]):
         raise ValueError("source_reviewed requires accessible references and input vision capability")
-    candidates = positive_int(request, "candidate_count", 3, 3)
+    candidates = positive_int(request, "candidate_count", 1, 3)
     max_calls = positive_int(request, "max_tool_calls", 5, 5)
     initial_calls = min(candidates, max_calls)
     repair_calls = min(2, max_calls - initial_calls)
@@ -82,15 +85,16 @@ def compose(request, capabilities):
     negative = (ROOT / "prompts/negative.txt").read_text(encoding="utf-8").strip()
     template = (ROOT / "prompts/edit-template.txt").read_text(encoding="utf-8")
     prompt = template.format(identity_notes=identity, style_direction=preset["direction"], preferences=preferences, negative_constraints=negative).strip()
-    styles = [style_id] * min(2, candidates)
+    styles = [requested_style] * min(2, candidates)
     if candidates == 3:
         styles.append(preset["adjacent"])
     variants = []
     for index, candidate_style in enumerate(styles[:initial_calls]):
-        direction = catalog["presets"][candidate_style]["direction"]
-        variation = "Keep the requested expression and a relaxed near-frontal pose."
+        resolved_candidate = catalog.get("aliases", {}).get(candidate_style, candidate_style)
+        direction = catalog["presets"][resolved_candidate]["direction"]
+        variation = "Keep the original head angle and expression close to the reference unless the user requests a change."
         if index == 1:
-            variation = "Use a slightly different shoulder angle with the same natural expression; keep the face directed toward the lens."
+            variation = "If practical, vary the shoulders slightly while preserving the face, head angle and expression from the original."
         variants.append({"candidate": index + 1, "style": candidate_style, "prompt": template.format(identity_notes=identity, style_direction=direction + " " + variation, preferences=preferences, negative_constraints=negative).strip()})
     executable = mode.startswith("image-edit")
     return {
@@ -99,7 +103,8 @@ def compose(request, capabilities):
         "execution": "not-executed",
         "images_generated": 0,
         "visual_qa": "not-performed",
-        "style": style_id,
+        "style": requested_style,
+        "resolved_style": style_id,
         "style_name": preset["name"],
         "references": references,
         "source_reviewed": reviewed,

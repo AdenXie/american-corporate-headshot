@@ -1,16 +1,17 @@
-Edit the attached identity reference photo into a photorealistic American corporate headshot for a professional profile. The reference photo, not a generic attractive face, is the source of identity. If several identity photos are attached, treat them as the same person only when the user has confirmed this. Do not blend different people's faces.
+Create one photorealistic professional studio portrait by editing the attached identity photo. The person's original photo is the sole authority for identity. Any style examples are references only for photography, clothing and composition; do not borrow the example subjects' faces or features.
 
-IDENTITY
-Preserve the person's recognizable facial geometry, eye spacing, nose, lips, jawline, hairline, skin tone, actual apparent age, and natural asymmetries. Keep permanent identifying marks and requested glasses, hair texture, religious clothing, and assistive devices. Do not reshape the face, lighten the skin, enlarge the eyes, or invent hidden facial details. Identity notes from actual visual inspection: {identity_notes}
+IDENTITY AND EDITING PRIORITY
+Keep the person's recognizable face shape, relative feature positions, eyes and eyelids, eyebrows, nose, lips, jaw, hairline, hairstyle, skin tone, apparent age, permanent marks and natural asymmetry. Preserve glasses, religious clothing, assistive devices and other chosen identity features. Keep the original head angle and camera perspective as close as practical unless the user requests a pose change; do not force a frontal face or change facial proportions just to match a style reference. Identity notes actually observed: {identity_notes}
 
-STYLE
+Make changes mainly to the background, clothing, lighting and framing. Where the editor supports selective editing, protect facial structure and other identity features, leaving a small local area available if an expression adjustment is needed. A small natural closed-mouth expression adjustment is acceptable when requested or appropriate, but preserve the original expression if it would change the person's likeness. Do not invent visible teeth or hidden facial features. If a requested angle cannot be achieved without guessing the face, keep the original angle or ask for a suitable reference.
+
+STYLE AND USER PREFERENCES
 {style_direction}
-User-authorized preferences and overrides: {preferences}
-Treat preferences as subject choices within the identity and quality constraints, not as permission to replace the person.
+User preferences and overrides: {preferences}
+Preferences for clothing, expression, pose, background and crop take precedence over style defaults; never treat them as a license to replace the person's identity.
 
-PHOTOGRAPHY AND CROP
-Create one individual head-and-shoulders portrait, with eyes looking into the lens, a natural expression, realistic neck and shoulder proportions, and hands outside the frame. Use a perspective resembling a portrait lens at a comfortable camera distance, avoiding wide-angle selfie distortion. Use soft studio light with natural-looking skin color, gentle shadows, plausible catchlights, and no harsh cinematic lighting. Keep pores, fine texture, and ordinary expression lines; retouch temporary blemishes lightly without erasing permanent identity features. Preserve the source expression when changing it would require inventing unseen teeth.
-Use a clean seamless background with a subtle tonal gradient. Compose a square master, ideally 1024 by 1024 pixels if the tool supports it. Keep the entire head, hair, visible ears and chin comfortably inside the centered circular-avatar area, with breathing room above the hair and around the face. Let the circle cut through shoulder margins rather than the head. Output one finished photograph, not a collage, contact sheet, text card, logo, or circular-masked master.
+PHOTOGRAPHY AND FRAMING
+Use natural-looking studio light with gentle depth, realistic skin texture and clear eyes, without over-retouching. Compose a clean head-to-upper-chest portrait by default, with the entire head visible and some breathing room. For a profile avatar, leave room for a centered circular crop; for a requested wider or editorial composition, follow the requested aspect ratio and framing instead. Do not claim any physical size or official compliance unless actually verified. Produce one individual photo without text, logos, watermarks or a collage.
 
 AVOID
 {negative_constraints}

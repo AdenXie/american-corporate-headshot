@@ -44,12 +44,41 @@ class PlannerTests(unittest.TestCase):
 
     def test_presets_and_adjacent_candidate(self):
         catalog = studio.load_json(ROOT / "styles/presets.json")
-        self.assertEqual(len(catalog["presets"]), 5)
+        self.assertEqual(set(catalog["presets"]), {"studio-blue", "studio-neutral"})
+        self.assertEqual(catalog["default"], "studio-blue")
         for style, preset in catalog["presets"].items():
-            plan = studio.compose(dict(self.request, style=style), self.caps)
+            plan = studio.compose(dict(self.request, style=style, candidate_count=3), self.caps)
             self.assertIn(preset["direction"], plan["prompt"])
             self.assertEqual([x["style"] for x in plan["candidate_variants"]], [style, style, preset["adjacent"]])
             self.assertIn(catalog["presets"][preset["adjacent"]]["direction"], plan["candidate_variants"][2]["prompt"])
+
+    def test_legacy_style_aliases_resolve_without_breaking_requests(self):
+        aliases = {
+            "classic-linkedin": "studio-blue",
+            "wall-street-finance": "studio-blue",
+            "consulting-mbb": "studio-blue",
+            "big-tech-startup": "studio-neutral",
+            "graduate-analyst": "studio-blue",
+        }
+        catalog = studio.load_json(ROOT / "styles/presets.json")
+        self.assertEqual(catalog["aliases"], aliases)
+        for old_style, new_style in aliases.items():
+            with self.subTest(style=old_style):
+                plan = studio.compose(dict(self.request, style=old_style, candidate_count=3), self.caps)
+                self.assertEqual(plan["style"], old_style)
+                self.assertEqual(plan["resolved_style"], new_style)
+                self.assertEqual(plan["candidate_variants"][0]["style"], old_style)
+                self.assertIn(catalog["presets"][new_style]["direction"], plan["candidate_variants"][0]["prompt"])
+                self.assertEqual(plan["candidate_variants"][2]["style"], catalog["presets"][new_style]["adjacent"])
+
+    def test_default_plan_is_one_blue_studio_candidate(self):
+        plan = studio.compose(self.request, self.caps)
+        self.assertEqual(plan["style"], "studio-blue")
+        self.assertEqual(plan["budget"]["initial_calls"], 1)
+        self.assertEqual(len(plan["candidate_variants"]), 1)
+        self.assertIn("blue", plan["prompt"].lower())
+        self.assertIn("sole authority for identity", plan["prompt"])
+        self.assertIn("do not borrow the example subjects' faces", plan["prompt"])
 
     def test_budget_bounds(self):
         for candidates in (1, 2, 3):

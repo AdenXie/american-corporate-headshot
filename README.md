@@ -1,6 +1,6 @@
 # American Corporate Headshot / LinkedIn 商务头像 Skill
 
-用本人自拍或半身照制作自然、可信、有棚拍质感的美式职业头像。适用于 LinkedIn、求职简历、个人网站等场景，提供五种摄影与着装预设。
+用本人自拍或半身照制作自然、可信、有棚拍质感的美式职业头像。适用于 LinkedIn、求职简历、个人网站等场景，提供两种可按用途调整的影棚预设。
 
 项目包含可直接加载的 [SKILL.md](SKILL.md)、英文编辑模板、工具适配说明、视觉质检清单，以及一个无需第三方依赖的离线提示词生成器。它不捆绑图像模型，也不承诺零瑕疵或求职结果。
 
@@ -13,17 +13,16 @@
 
 如果连原图也看不到，只能给标记清楚的通用模板。仅有从文字生图能力不够，不能用新造的人脸冒充本人。图片生成后也不能因为接口成功就声称已完成视觉质检。
 
-## 五种预设
+## 两种影棚预设
 
 | ID | 风格 | 摄影与着装方向 |
 | --- | --- | --- |
-| `classic-linkedin` | Classic LinkedIn Corporate | 默认通用；浅暖灰、简洁西装、自然微笑 |
-| `wall-street-finance` | Wall Street / Finance | 深灰或蓝灰、深色正装、克制表情 |
-| `consulting-mbb` | Consulting / MBB Polished | 干净暖灰、正式而温和、明亮柔光 |
-| `big-tech-startup` | Big Tech / Startup Professional | 明亮背景、smart casual、放松自然 |
-| `graduate-analyst` | Graduate / Analyst | 清爽、合身正装、友好表情 |
+| `studio-blue` | 蓝色纹理影棚 | 默认通用；蓝色或蓝灰色细纹理背景、柔和立体光、简洁深色商务服 |
+| `studio-neutral` | 中性极简影棚 | 浅灰或米白渐变背景、柔和定向光、简洁服装和适度留白 |
 
-预设不会改变本人年龄、肤色、五官或身份表达。“MBB”“Wall Street”等名称只描述视觉方向，不表示所属机构、真实职级或学历。服装可按用户偏好调整，默认保留眼镜、宗教服饰、辅助设备和永久身份特征。
+金融、咨询、校招和一般商务头像可从蓝色影棚开始；科技或更简约的个人主页头像可选中性极简。服装、背景、表情和构图可按用户偏好调整。默认保留本人五官、年龄、肤色、发型、眼镜、宗教服饰、辅助设备和永久身份特征；成品须由本人确认相似度。
+
+旧 ID 仍可输入，但会使用新风格：`classic-linkedin`、`wall-street-finance`、`consulting-mbb`、`graduate-analyst` 映射到 `studio-blue`；`big-tech-startup` 映射到 `studio-neutral`。JSON 计划的 `style` 保留输入值，`resolved_style` 标明实际预设。
 
 ## 直接使用 Skill
 
@@ -51,7 +50,7 @@ git clone --depth 1 https://github.com/AdenXie/american-corporate-headshot.git "
 
 ```text
 使用 $american-corporate-headshot。照片是我本人，用于 LinkedIn 和金融实习申请。
-请选择 Finance 风格，保留眼镜、不打领带、保持本人年龄。
+请选择蓝色纹理影棚，保留眼镜、不打领带、保持本人五官和年龄。
 先检查你能否查看原图、使用参考图编辑工具并查看结果。
 工具和已有授权允许时，最多三张候选和两次修复；没有编辑工具就交付英文提示词。
 ```
@@ -71,7 +70,7 @@ python scripts/prompt_studio.py --request examples/request.json --capabilities e
 python -m unittest discover -s tests -v
 ```
 
-`--out` 拒绝覆盖已有文件，重新运行时使用新文件名。JSON 输出包含模式、状态、完整提示词、候选提示词、预算和未执行声明；`--format prompt` 输出一份主提示词。默认三张候选为所选风格两张、相邻风格一张，第三张使用自己的完整风格提示词。
+`--out` 拒绝覆盖已有文件，重新运行时使用新文件名。JSON 输出包含模式、状态、完整提示词、候选提示词、预算和未执行声明；`--format prompt` 输出一份主提示词。默认规划一张；明确设置三张时为所选风格两张、相邻风格一张，第三张使用自己的完整风格提示词。
 
 示例请求的 `source_reviewed` 和 `provider_processing_authorized` 均为 false，所以默认输出会等待原图分析，而不会声称执行条件已满足。实际使用时把请求复制到 `private/`，由能够看图的模型据实填写 `identity_notes` 和已看图状态；授权字段仅在真实授权覆盖目标服务时设为 true。`references` 是附件标签，不会自动加载文件。
 
@@ -85,7 +84,7 @@ american-corporate-headshot/
   README.md                      使用与安装说明
   LICENSE                        AGPL-3.0 完整许可证
   agents/openai.yaml              可选的 Codex 展示元数据
-  styles/presets.json             五种预设与相邻风格
+  styles/presets.json             两种预设与旧 ID 兼容映射
   prompts/                       主编辑、负面约束、局部修复模板
   references/                    工具适配、质量审查、隐私授权
   examples/                      完整工作流、请求、能力示例、验收场景
@@ -96,17 +95,17 @@ american-corporate-headshot/
 
 ## 质量与隐私
 
-身份相似度优先，保留自然皮肤纹理与真实左右差异；审查五官、牙齿、耳朵、发际线、眼镜、领口、西装、光线、背景和头像裁切。方形 1024×1024 母图与约 96 px 圆形预览是建议工作尺寸，不是平台官方规格。
+身份相似度优先，保留自然皮肤纹理、原有脸部角度和真实左右差异；其他人物的样板只用于参考摄影风格，不能作为五官来源。审查五官、牙齿、发际线、眼镜、服装、光线、背景及适用的头像裁切。约 96 px 的圆形缩略图是检查建议，不是平台官方规格。
 
-默认全任务最多五次图像调用，包括最多三次初始编辑和两次修复；失败提交也计数。遵守用户更小的预算。身份持续漂移、原图不清楚或预算耗尽时停止。详细规则见 [质量审查](references/quality-review.md)。无法 100% 保证零瑕疵，最终由本人确认是否像自己及是否适合使用。
+默认最多五次图像调用，包括最多三次初始编辑和两次修复；失败提交也计数。用户明确要求更多候选时可调整上限，离线脚本单次最多规划三张；遵守用户更小的预算。身份持续漂移、原图不清楚或预算耗尽时停止。详细规则见 [质量审查](references/quality-review.md)。最终由本人确认是否像自己及是否适合使用。
 
 原图、成品和私人任务记录不得提交 Git。仓库已忽略常见图片、`private/`、`inputs/`、`outputs/`、`runs/` 和 `.env`，但忽略规则不能清理已经提交的历史。发送照片到外部服务前，说明服务与用途，遵循已有授权。见 [隐私与授权](references/privacy.md)。
 
-本版不含用户照片或真实生成样张，尚未做真实人物图片的端到端视觉验证。离线测试只能验证程序行为，不能证明人物身份一致或生成质量。想查看五种风格的真实效果，需要本人参考图和已授权的图像编辑环境。
+仓库不含用户照片或真实生成样张。离线测试只能验证程序行为，不能证明人物身份一致或生成质量；查看成品效果需要本人参考图和已授权的图像编辑环境。
 
 ## English overview
 
-An identity-preserving corporate headshot skill with five style presets, reference-image editing workflows, visual QA, bounded repairs, and a vision-only Prompt Studio fallback. A vision model that only outputs text cannot produce images without an image tool. The included Python CLI is an offline prompt and plan composer, not an image generator. Keep personal photos out of Git and have the subject approve the final likeness.
+An identity-preserving corporate headshot skill with blue textured and neutral minimalist studio presets, reference-image editing workflows, visual QA, bounded repairs, and a vision-only Prompt Studio fallback. A vision model that only outputs text cannot produce images without an image tool. The included Python CLI is an offline prompt and plan composer, not an image generator. Keep personal photos out of Git and have the subject approve the final likeness.
 
 ## 开源许可证
 
